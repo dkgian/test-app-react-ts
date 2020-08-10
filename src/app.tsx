@@ -21,6 +21,20 @@ export const App = () => {
     setName(editingName);
   };
 
+  const shouldDisableButton = () => {
+    const containUppercaseRegex = /[A-Z]/;
+    const containNumberRegex = /[0-9]/;
+    const containSpecialCharacter = /[.,@,_]/;
+
+    return (
+      editingName === "" ||
+      editingName === name ||
+      !editingName.match(containUppercaseRegex) ||
+      !editingName.match(containNumberRegex) ||
+      !editingName.match(containSpecialCharacter)
+    );
+  };
+
   return (
     <>
       <HelloComponent userName={name} />
@@ -30,7 +44,7 @@ export const App = () => {
         editingName={editingName}
         onNameUpdate={onNameUpdate}
         onEditingNameUpdate={setEditingName}
-        disabled={editingName === "" || editingName === name}
+        disabled={shouldDisableButton()}
       />
     </>
   );
