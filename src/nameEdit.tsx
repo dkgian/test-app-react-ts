@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import "./nameEdit.css";
+
 interface Props {
   initialUsername: string;
   onNameUpdate: () => any;
@@ -17,11 +19,28 @@ export const NameEditComponent = (props: Props) => {
     props.onNameUpdate();
   };
 
+  const inputValidator = () => {
+    const containUppercaseRegex = /[A-Z]/;
+    const containNumberRegex = /[0-9]/;
+    const containSpecialCharacter = /[.,@,_]/;
+
+    return (
+      !props.editingName.match(containUppercaseRegex) ||
+      !props.editingName.match(containNumberRegex) ||
+      !props.editingName.match(containSpecialCharacter)
+    );
+  };
+
+  const showError = () => {};
+
   return (
     <>
       <label>Update name: </label>
       <input value={props.editingName} onChange={onChangeName} />
-      <button onClick={onNameSubmit} disabled={props.disabled}>
+      <button
+        onClick={onNameSubmit}
+        disabled={inputValidator() || props.disabled}
+      >
         Change
       </button>
     </>

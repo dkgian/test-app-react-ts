@@ -9,7 +9,7 @@ export const App = () => {
   const loadUsername = () => {
     setTimeout(() => {
       setName("name from async call");
-      setEditingName("name from asyn call");
+      setEditingName("name from async call");
     }, 2000);
   };
 
@@ -21,18 +21,8 @@ export const App = () => {
     setName(editingName);
   };
 
-  const shouldDisableButton = () => {
-    const containUppercaseRegex = /[A-Z]/;
-    const containNumberRegex = /[0-9]/;
-    const containSpecialCharacter = /[.,@,_]/;
-
-    return (
-      editingName === "" ||
-      editingName === name ||
-      !editingName.match(containUppercaseRegex) ||
-      !editingName.match(containNumberRegex) ||
-      !editingName.match(containSpecialCharacter)
-    );
+  const disabled = () => {
+    return editingName === "" || editingName === name;
   };
 
   return (
@@ -44,7 +34,7 @@ export const App = () => {
         editingName={editingName}
         onNameUpdate={onNameUpdate}
         onEditingNameUpdate={setEditingName}
-        disabled={shouldDisableButton()}
+        disabled={disabled()}
       />
     </>
   );
