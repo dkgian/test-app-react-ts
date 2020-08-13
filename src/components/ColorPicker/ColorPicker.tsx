@@ -13,40 +13,19 @@ export const ColorPicker = (props: Props) => {
     onColorUpdate,
   } = props;
   props.color;
+
+  const updateColor = (props: Props, colorId: keyof Color) => (value) => {
+    props.onColorUpdate({
+      ...props.color,
+      [colorId]: value,
+    });
+  };
+
   return (
     <>
-      <ColorSlider
-        value={red}
-        onValueUpdate={(value) =>
-          onColorUpdate({
-            red: value,
-            green: props.color.green,
-            blue: props.color.blue,
-          })
-        }
-      />
-
-      <ColorSlider
-        value={green}
-        onValueUpdate={(value) =>
-          onColorUpdate({
-            red: props.color.red,
-            green: value,
-            blue: props.color.blue,
-          })
-        }
-      />
-
-      <ColorSlider
-        value={blue}
-        onValueUpdate={(value) =>
-          onColorUpdate({
-            red: props.color.red,
-            green: props.color.green,
-            blue: value,
-          })
-        }
-      />
+      <ColorSlider value={red} onValueUpdate={updateColor(props, "red")} />
+      <ColorSlider value={green} onValueUpdate={updateColor(props, "green")} />
+      <ColorSlider value={blue} onValueUpdate={updateColor(props, "blue")} />
     </>
   );
 };
