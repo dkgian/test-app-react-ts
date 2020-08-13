@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Color } from "../../model/color";
+import { ColorSlider } from "./ColorSlider";
 
 interface Props {
   color: Color;
@@ -7,52 +8,45 @@ interface Props {
 }
 
 export const ColorPicker = (props: Props) => {
+  const {
+    color: { red, green, blue },
+    onColorUpdate,
+  } = props;
+  props.color;
   return (
-    <div>
-      <input
-        type="text"
-        min="0"
-        max="255"
-        value={props.color.red}
-        onChange={(e) => {
-          props.onColorUpdate({
-            red: +e.target.value,
+    <>
+      <ColorSlider
+        value={red}
+        onValueUpdate={(value) =>
+          onColorUpdate({
+            red: value,
             green: props.color.green,
             blue: props.color.blue,
-          });
-        }}
+          })
+        }
       />
-      R: {props.color.red}
-      <hr />
-      <input
-        type="text"
-        min="0"
-        max="255"
-        value={props.color.green}
-        onChange={(e) => {
-          props.onColorUpdate({
+
+      <ColorSlider
+        value={green}
+        onValueUpdate={(value) =>
+          onColorUpdate({
             red: props.color.red,
-            green: +e.target.value,
+            green: value,
             blue: props.color.blue,
-          });
-        }}
+          })
+        }
       />
-      G: {props.color.green}
-      <hr />
-      <input
-        type="text"
-        min="0"
-        max="255"
-        value={props.color.red}
-        onChange={(e) => {
-          props.onColorUpdate({
+
+      <ColorSlider
+        value={blue}
+        onValueUpdate={(value) =>
+          onColorUpdate({
             red: props.color.red,
             green: props.color.green,
-            blue: +e.target.value,
-          });
-        }}
+            blue: value,
+          })
+        }
       />
-      B: {props.color.blue}
-    </div>
+    </>
   );
 };
