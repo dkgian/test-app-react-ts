@@ -12,7 +12,6 @@ export const ColorPicker = (props: Props) => {
     color: { red, green, blue },
     onColorUpdate,
   } = props;
-  props.color;
 
   const updateColor = (props: Props, colorId: keyof Color) => (value) => {
     props.onColorUpdate({
@@ -20,12 +19,16 @@ export const ColorPicker = (props: Props) => {
       [colorId]: value,
     });
   };
-
+  console.log(">>", Object.keys(props.color));
   return (
     <>
-      <ColorSlider value={red} onValueUpdate={updateColor(props, "red")} />
-      <ColorSlider value={green} onValueUpdate={updateColor(props, "green")} />
-      <ColorSlider value={blue} onValueUpdate={updateColor(props, "blue")} />
+      {Object.keys(props.color).map((field: keyof Color) => (
+        <ColorSlider
+          key={field}
+          value={props.color[field]}
+          onValueUpdate={updateColor(props, field)}
+        />
+      ))}
     </>
   );
 };
