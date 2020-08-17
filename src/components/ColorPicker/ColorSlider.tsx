@@ -10,7 +10,7 @@ export const ColorSlider = (props: ColorSliderProps) => {
   return (
     <>
       <input
-        type="text"
+        type="range"
         min="0"
         max="255"
         value={props.value}
