@@ -5,6 +5,7 @@ import {
   NameEditComponent,
   ColorBrowser,
   ColorPicker,
+  SidebarComponent,
 } from "./components";
 import { Color } from "./model/color";
 
@@ -16,6 +17,7 @@ export const App = () => {
     green: 60,
     blue: 60,
   });
+  const [isVisible, setIsVisible] = React.useState(false)
 
   const loadUsername = () => {
     setTimeout(() => {
@@ -39,6 +41,7 @@ export const App = () => {
   return (
     <>
       <HelloComponent userName={name} />
+      <SidebarComponent isVisible={isVisible} />
 
       <ColorBrowser color={color} />
       <ColorPicker color={color} onColorUpdate={setColor} />
@@ -50,6 +53,12 @@ export const App = () => {
         onEditingNameUpdate={setEditingName}
         disabled={disabled()}
       />
+
+      <div style={{ float: "right"}}>
+        <button onClick={() => setIsVisible(!isVisible)}>
+          Toogle sidebar
+        </button>
+      </div>
     </>
   );
 };

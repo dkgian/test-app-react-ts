@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import "./NameEdit.css";
+// import "./NameEdit.css";
 
 interface Props {
   initialUsername: string;

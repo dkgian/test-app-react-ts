@@ -8,7 +8,7 @@ var basePath = __dirname;
 module.exports = {
   context: path.join(basePath, "src"),
   resolve: {
-    extensions: [".js", ".ts", ".tsx"]
+    extensions: [".js", ".ts", ".tsx", ".css"]
   },
   entry: ["@babel/polyfill", "./index.tsx"],
   output: {
@@ -36,8 +36,27 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"]
+        include: /node_modules/,
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
+       // Use CSS modules for custom stylesheets
+        {
+          test: /\.css$/,
+          exclude: /node_modules/,
+          use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+            modules: {
+              localIdentName: "[name]__[local]___[hash:base64:5]",
+            },
+            localsConvention: "camelCase",
+          },
+          },
+      ]
+  },
+  // Do not use CSS modules in node_modules folder
       {
         test: /\.(png|jpg|gif|svg)$/,
         loader: "file-loader",

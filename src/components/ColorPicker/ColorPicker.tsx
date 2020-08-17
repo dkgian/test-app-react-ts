@@ -19,7 +19,7 @@ export const ColorPicker = (props: Props) => {
       [colorId]: value,
     });
   };
-  console.log(">>", Object.keys(props.color));
+  
   return (
     <>
       {Object.keys(props.color).map((field: keyof Color) => (
