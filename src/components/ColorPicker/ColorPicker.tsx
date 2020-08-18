@@ -1,6 +1,7 @@
 import * as React from "react";
-import { Color } from "../../model/color";
+
 import { ColorSlider } from "./ColorSlider";
+import { Color } from "../../model";
 
 interface Props {
   color: Color;
@@ -19,7 +20,7 @@ export const ColorPicker = (props: Props) => {
       [colorId]: value,
     });
   };
-  
+
   return (
     <>
       {Object.keys(props.color).map((field: keyof Color) => (
