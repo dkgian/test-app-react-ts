@@ -17,7 +17,7 @@ export const App = () => {
     green: 60,
     blue: 60,
   });
-  const [isVisible, setIsVisible] = React.useState(false)
+  const [isVisible, setIsVisible] = React.useState(false);
 
   const loadUsername = () => {
     setTimeout(() => {
@@ -38,10 +38,29 @@ export const App = () => {
     return editingName === "" || editingName === name;
   };
 
+  const toogleSidebarVisibility = () => {
+    setIsVisible(!isVisible);
+  };
+
   return (
     <>
       <HelloComponent userName={name} />
-      <SidebarComponent isVisible={isVisible} />
+
+      <SidebarComponent isVisible={isVisible}>
+        <ul>
+          <li>
+            <a href="https://www.imdb.com/title/tt0816692/">Interstellar</a>
+          </li>
+          <li>
+            <a href="https://www.imdb.com/title/tt0083658/">Blade Runner</a>
+          </li>
+          <li>
+            <a href="https://www.imdb.com/title/tt0062622/">
+              2001: a space odyssey
+            </a>
+          </li>
+        </ul>
+      </SidebarComponent>
 
       <ColorBrowser color={color} />
       <ColorPicker color={color} onColorUpdate={setColor} />
@@ -54,10 +73,8 @@ export const App = () => {
         disabled={disabled()}
       />
 
-      <div style={{ float: "right"}}>
-        <button onClick={() => setIsVisible(!isVisible)}>
-          Toogle sidebar
-        </button>
+      <div style={{ float: "right" }}>
+        <button onClick={toogleSidebarVisibility}>Toogle sidebar</button>
       </div>
     </>
   );
