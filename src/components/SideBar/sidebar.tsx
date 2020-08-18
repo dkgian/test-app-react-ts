@@ -7,10 +7,10 @@ interface Props {
 }
 
 const divStyle = (props: Props): React.CSSProperties => ({
-  width: props.isVisible ? "23rem" : "0rem",
+  width: props.isVisible ? "30%" : "0%",
 });
 
-export const SidebarComponent: React.StatelessComponent<Props> = (props) => (
+export const SidebarComponent: React.FunctionComponent<Props> = (props) => (
   <div id="mySidenav" className={classNames.sidenav} style={divStyle(props)}>
     {props.children}
   </div>
