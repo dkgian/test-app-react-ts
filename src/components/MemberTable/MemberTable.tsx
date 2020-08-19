@@ -17,21 +17,28 @@ export const MemberTable = () => {
     loadMemberCollection();
   }, []);
 
+  const TableHeader = () => (
+    <thead>
+      <tr>
+        <th>Avavtar</th>
+        <th>id</th>
+        <th>login</th>
+      </tr>
+    </thead>
+  );
+
+  const TableBody = () => (
+    <tbody>
+      {memberCollection.map((member) => (
+        <MemberRow key={member.id} member={member} />
+      ))}
+    </tbody>
+  );
+
   return (
     <table>
-      <thead>
-        <tr>
-          <th>Avavtar</th>
-          <th>id</th>
-          <th>login</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        {memberCollection.map((member) => (
-          <MemberRow key={member.id} member={member} />
-        ))}
-      </tbody>
+      <TableHeader />
+      <TableBody />
     </table>
   );
 };
