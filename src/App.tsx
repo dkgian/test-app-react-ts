@@ -6,6 +6,7 @@ import {
   ColorBrowser,
   ColorPicker,
   SidebarComponent,
+  MemberTable,
 } from "./components";
 import { Color } from "./model/color";
 
@@ -72,6 +73,8 @@ export const App = () => {
         onEditingNameUpdate={setEditingName}
         disabled={disabled()}
       />
+
+      <MemberTable />
 
       <div style={{ float: "right" }}>
         <button onClick={toogleSidebarVisibility}>Toogle sidebar</button>
