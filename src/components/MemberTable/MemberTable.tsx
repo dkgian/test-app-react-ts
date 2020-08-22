@@ -9,8 +9,9 @@ export const MemberTable = () => {
     MemberEntity[]
   >([]);
 
-  const loadMemberCollection = () => {
-    getMemberCollection().then((result) => setMemberCollection(result));
+  const loadMemberCollection = async () => {
+    const memberCollection = await getMemberCollection();
+    setMemberCollection(memberCollection);
   };
 
   React.useEffect(() => {

@@ -1,26 +1,26 @@
+import axios, { AxiosResponse } from "axios";
 import { MemberEntity } from "../model/member";
 
-export const getMemberCollection = (): Promise<MemberEntity[]> => {
-  const promise = new Promise<MemberEntity[]>((resolve, reject) => {
-    setTimeout(
-      () =>
-        resolve([
-          {
-            id: 1457912,
-            login: "flower1",
-            avatar_url:
-              "https://cdn.pixabay.com/photo/2014/04/14/20/11/japanese-cherry-trees-324175_960_720.jpg",
-          },
-          {
-            id: 4374977,
-            login: "flower2",
-            avatar_url:
-              "https://cdn.pixabay.com/photo/2014/04/14/20/11/japanese-cherry-trees-324175_960_720.jpg",
-          },
-        ]),
-      500
-    );
-  });
+const githubUrl = "https://api.github.com";
+const gitHubMembersUrl = `${githubUrl}/orgs/lemoncode/members`;
 
-  return promise;
+const mapMemberListApiToModel = ({
+  data,
+}: AxiosResponse<any[]>): MemberEntity[] =>
+  data.map((member) => ({
+    id: member.id,
+    login: member.login,
+    avatar_url: member.avatar_url,
+  }));
+
+export const getMemberCollection = (): Promise<MemberEntity[]> => {
+  return new Promise<MemberEntity[]>((resolve, reject) => {
+    try {
+      axios
+        .get<MemberEntity[]>(gitHubMembersUrl)
+        .then((members) => resolve(mapMemberListApiToModel(members)));
+    } catch (err) {
+      reject(err);
+    }
+  });
 };
