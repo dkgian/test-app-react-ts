@@ -1,5 +1,5 @@
 import * as React from "react";
-
+import { HashRouter, Switch, Route } from "react-router-dom";
 import {
   HelloComponent,
   NameEditComponent,
@@ -9,6 +9,8 @@ import {
   MemberTable,
 } from "./components";
 import { Color } from "./model/color";
+import { PageA } from "./components/Pages/PageA";
+import { PageB } from "./components/Pages/PageB";
 
 export const App = () => {
   const [name, setName] = React.useState("default name");
@@ -45,8 +47,14 @@ export const App = () => {
 
   return (
     <>
-      <HelloComponent userName={name} />
+      <HashRouter>
+        <Switch>
+          <Route exact={true} path="/" component={PageA} />
+          <Route path="/pageB" component={PageB} />
+        </Switch>
+      </HashRouter>
 
+      <HelloComponent userName={name} />
       <SidebarComponent isVisible={isVisible}>
         <ul>
           <li>
@@ -62,10 +70,8 @@ export const App = () => {
           </li>
         </ul>
       </SidebarComponent>
-
       <ColorBrowser color={color} />
       <ColorPicker color={color} onColorUpdate={setColor} />
-
       <NameEditComponent
         initialUsername={name}
         editingName={editingName}
@@ -73,9 +79,7 @@ export const App = () => {
         onEditingNameUpdate={setEditingName}
         disabled={disabled()}
       />
-
       <MemberTable />
-
       <div style={{ float: "right" }}>
         <button onClick={toogleSidebarVisibility}>Toogle sidebar</button>
       </div>
